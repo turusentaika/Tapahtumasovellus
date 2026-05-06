@@ -5,27 +5,27 @@ class Review {
 
     // Hae kaikki tai tyypin mukaan
     public function getAll($type = null) {
-        $sql = "SELECT * FROM arvostelu";
-        if ($type) $sql .= " WHERE tyyppi = :tyyppi";
-        $sql .= " ORDER BY paivays DESC";
+        $sql = "SELECT * FROM tapahtumat";
+        if ($type) $sql .= " WHERE type = :type";
+        $sql .= " ORDER BY date DESC";
         
         $stmt = $this->conn->prepare($sql);
-        if ($type) $stmt->bindParam(":tyyppi", $type);
+        if ($type) $stmt->bindParam(":type", $type);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function create($data) {
-        $sql = "INSERT INTO arvostelu (tyyppi, nimi, arvosana, kuvaus, kayttaja_id) 
-                VALUES (:tyyppi, :nimi, :arvosana, :kuvaus, :kayttaja_id)";
+        $sql = "INSERT INTO tapahtumat (date, name, type, publisher, userID) 
+                VALUES (:date, :name, :type, :publisher, :userID)";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute($data);
     }
 
-    public function delete($id, $user_id) {
-        $sql = "DELETE FROM arvostelu WHERE id = :id AND kayttaja_id = :user_id";
+    public function delete($ID, $userID) {
+        $sql = "DELETE FROM tapahtumat WHERE id = :ID AND userID = :userID";
         $stmt = $this->conn->prepare($sql);
-        return $stmt->execute(['id' => $id, 'user_id' => $user_id]);
+        return $stmt->execute(['ID' => $ID, 'userID' => $userID]);
     }
 }
 ?>
