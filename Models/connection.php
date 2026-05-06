@@ -1,9 +1,9 @@
 <?php
 class Database {
-    public $host = "193.111.119.217";
-    public $db_name = "taitur25_arvostelu_db";
-    public $username = "taitur25_user"; // Vaihda tarvittaessa
-    public $password = "md44skj8!!";     // Vaihda tarvittaessa
+    public $host = "projekti.taitur25.treok.io";
+    public $db_name = "taitur25_tapahtumasovellus";
+    public $username = "taitur25_projektikayttaja"; // Vaihda tarvittaessa
+    public $password = "1337projekti";     // Vaihda tarvittaessa
     public $conn;
 
     public function getConnection() {
